@@ -1,6 +1,8 @@
 #!/bin/env python3
 ''' Code to write QR code and WiFi info 
     Depends on DFRobot Display library for eink display
+    Importing the libraries isn't particularly graceful, 
+    would be nice to improve this.
 
     Font ttf to use and WiFi details are read from settings.yml    
     '''
