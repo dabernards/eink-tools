@@ -9,7 +9,12 @@ Requires DFRobot display library. The [original library](https://github.com/cdjq
 
 ### Dependencies
 Yaml is used for settings. QR code used to generate the QR code and pillow to convert the png to a bmp
+
 `pip install pyyaml qrcode pillow`
+`sudo apt install python3-spidev python3-freetype fonts-dejavu-core`
+
 
 ### Use
-Added `python3 wifi-qr.py` to /etc/rc.local to ensure display is present on boot up.
+Run `python3 wifi-qr.py` (currently requires running as root)
+
+If auto-refresh is desired, the systemd service can be addd. Copy `wifi-qr.service` to `/etc/systemd/system/` and enable the service with `sudo systemctl enable wifi-qr`
