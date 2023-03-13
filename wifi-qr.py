@@ -3,6 +3,7 @@
     Depends on DFRobot Display library for eink display
     Importing the libraries isn't particularly graceful, 
     would be nice to improve this.
+    For now full path used to function w/ systemd service
 
     Font ttf to use and WiFi details are read from settings.yml    
     '''
@@ -12,14 +13,14 @@ import qrcode
 from PIL import Image as pimg
 import yaml
 # Need to add path of DFRobot display library
-sys.path.append("../DFRobot_RPi_Display_V3") # set system path to top
+sys.path.append("/home/dietpi/DFRobot_RPi_Display_V3") # set system path to top
 
 #import time
 # DFRobot libraries
 from devices import DFRobot_Epaper
 from display_extension.freetype_helper import Freetype_Helper
 
-with open('settings.yml', 'r', encoding='utf-8') as f:
+with open('/home/dietpi/eink-tools/settings.yml', 'r', encoding='utf-8') as f:
     settings = yaml.safe_load(f)
 
 # Any fixed-width font should work here
@@ -32,9 +33,9 @@ qr = qrcode.QRCode(
 
 qr.add_data(f"WIFI:S:{ settings['ssid'] };T:WPA;P:{ settings['password']};;")
 qr_png = qr.make_image()
-qr_png.save("qr-code.png")
-qr_bmp = pimg.open("qr-code.png")
-qr_bmp.save("qr-code.bmp")
+qr_png.save("/tmp/qr-code.png")
+qr_bmp = pimg.open("/tmp/qr-code.png")
+qr_bmp.save("/tmp/qr-code.bmp")
 
 # peripheral params
 RASPBERRY_SPI_BUS = 0
@@ -57,7 +58,7 @@ epaper.clearScreen()
 epaper.setExFonts(ft) # init with fonts file
 epaper.setTextFormat(1, epaper.BLACK, epaper.WHITE, 1, 1)
 
-epaper.bitmapFile(0, 0, "./qr-code.bmp")
+epaper.bitmapFile(0, 0, "/tmp/qr-code.bmp")
 
 epaper.setExFontsFmt(20, 20) # set extension fonts width and height
 epaper.setTextCursor(140,0)
