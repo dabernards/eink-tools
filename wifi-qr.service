@@ -1,0 +1,11 @@
+[Unit]
+Description=WiFi QR Code
+After=network.target
+
+[Service]
+User=root
+Type=simple
+ExecStart=/usr/bin/python3 /home/dietpi/eink-tools/wifi-qr.py
+
+[Install]
+WantedBy=multi-user.target
