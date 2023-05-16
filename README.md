@@ -11,10 +11,11 @@ Requires DFRobot display library. The [original library](https://github.com/cdjq
 Yaml is used for settings. QR code used to generate the QR code and pillow to convert the png to a bmp
 
 `pip install pyyaml qrcode pillow`
+
 `sudo apt install python3-spidev python3-freetype fonts-dejavu-core`
 
 
 ### Use
-Run `python3 wifi-qr.py` (currently requires running as root)
+Run `python3 wifi-qr.py` (currently requires running as root, should be able to add user to gpio or dialout group to give user priviledge to GPIO pins, but have yet to check/test)
 
 If auto-refresh is desired, the systemd service can be addd. Copy `wifi-qr.service` to `/etc/systemd/system/` and enable the service with `sudo systemctl enable wifi-qr`
